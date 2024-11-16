@@ -1,0 +1,33 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: |
+          npm install -g npx jq
+
+      - name: Build the Website
+        working-directory: ./website
+        run: make build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@main
+        with:
+          entry-point: ./_site
+          api-token: ${{ secrets.CF_API_TOKEN }}
