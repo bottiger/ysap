@@ -30,7 +30,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pages publish ./_site --project-name=ysap
+          command: pages deploy ./website/_site --project-name=ysap
       #- name: Deploy to Cloudflare Pages
       #  uses: cloudflare/wrangler-action@main
       #  with:
