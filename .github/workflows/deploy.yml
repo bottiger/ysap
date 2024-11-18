@@ -33,6 +33,8 @@ jobs:
             event.respondWith(handleRequest(event.request));
           });
 
+          const PAGES_URL = "https://ysap.pages.dev";
+
           async function handleRequest(request) {
             const url = new URL(request.url);
             const userAgent = request.headers.get("User-Agent") || "";
@@ -40,14 +42,14 @@ jobs:
             // Serve index.txt for curl, else index.html
             if (url.pathname === "/" || url.pathname === "/index.html") {
               if (/curl/i.test(userAgent)) {
-                return fetch(new URL("/index.txt", url).href);
+                return fetch(new URL("/index.txt", PAGES_URL).href);
               } else {
-                return fetch(new URL("/index.html", url).href);
+                return fetch(new URL("/index.html", PAGES_URL).href);
               }
             }
 
             // Serve other static files from the _site directory
-            return fetch(url.href);
+              return fetch(new URL(url.pathname, PAGES_URL).href);
           }' > dist/index.js
 
       - name: Deploy to Cloudflare Pages
@@ -60,4 +62,4 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: publish dist/index.js --name curl-user-agent-handler
+          command: deploy dist/index.js --name curl-user-agent-handler
