@@ -27,7 +27,12 @@ jobs:
         run: make build
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@main
+        uses: cloudflare/wrangler-action@v3
         with:
-          entry-point: ./_site
-          api-token: ${{ secrets.CF_API_TOKEN }}
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages publish ./_site --project-name=ysap
+      #- name: Deploy to Cloudflare Pages
+      #  uses: cloudflare/wrangler-action@main
+      #  with:
+      #    entry-point: ./_site
+      #    api-token: ${{ secrets.CF_API_TOKEN }}
