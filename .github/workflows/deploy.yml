@@ -26,8 +26,38 @@ jobs:
         working-directory: ./website
         run: make build
 
+      - name: Build the Worker Script
+        run: |
+          mkdir -p dist
+          echo 'addEventListener("fetch", event => {
+            event.respondWith(handleRequest(event.request));
+          });
+
+          async function handleRequest(request) {
+            const url = new URL(request.url);
+            const userAgent = request.headers.get("User-Agent") || "";
+
+            // Serve index.txt for curl, else index.html
+            if (url.pathname === "/" || url.pathname === "/index.html") {
+              if (/curl/i.test(userAgent)) {
+                return fetch(new URL("/index.txt", url).href);
+              } else {
+                return fetch(new URL("/index.html", url).href);
+              }
+            }
+
+            // Serve other static files from the _site directory
+            return fetch(url.href);
+          }' > dist/index.js
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           command: pages deploy ./website/_site --project-name=ysap
+
+      - name: Deploy to Cloudflare Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: publish dist/index.js --name curl-user-agent-handler
