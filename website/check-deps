@@ -18,6 +18,7 @@ check() {
 
 check command -v npx
 check command -v jq
+check command -v lolcat
 check npx strip-ansi-cli --version
 check npx ansi-to-html --version
 
