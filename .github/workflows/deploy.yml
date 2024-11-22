@@ -21,6 +21,11 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get install jq
+          sudo apt-get install lolcat
+
+      - name: Check dependencies
+        working-directory: ./website
+        run: make check-deps
 
       - name: Build the Website
         working-directory: ./website
