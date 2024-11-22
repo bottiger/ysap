@@ -9,6 +9,7 @@
 . ./colors || exit 1
 . ./util || exit 1
 
+lolcat --freq=0.3 --force art.txt > logo.txt
 mapfile -t logo < logo.txt
 
 description=(
@@ -28,3 +29,6 @@ for ((i = 0; i < len; i++)); do
 
 	echo -e "${BOLD_COLOR}$logo_line${RST_COLOR} $desc_line"
 done
+
+
+

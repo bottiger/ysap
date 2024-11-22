@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# Generate a page with my socials
+#
+# Author: Dave Eddy <dave@daveeddy.com>
+# Date: March 17, 2024
+# License: MIT
+
+. ./colors || exit 1
+. ./util || exit 1
+
+description1=$(cat <<'EOF'
+TrollMe.sh is a website and a script that aims to be the fastest way to install friendly but annoying scripts on your friends' computers. These scripts perform amusing actions to surprise them. Simply run the following command on their terminal:
+EOF
+)
+
+description2=$(cat <<'EOF'
+Trolling with Love is a Firefox extension designed for mischief and humor among friends. It replaces a small percentage of images on web pages with images of Nicolas Cage or ponies, based on user settings. This playful tool allows you to surprise and amuse your friends as they browse the web.
+EOF
+)
+
+description3=$(cat <<'EOF'
+SoundWaves was a free, libre and open source app for fetching and listening to podcasts.
+EOF
+)
+
+links1=$(cat <<'EOF'
+https://trollme.sh
+https://github.com/bottiger/trollme.sh
+EOF
+)
+
+links2=$(cat <<'EOF'
+https://addons.mozilla.org/en-US/firefox/addon/trolling-with-love/
+https://chromewebstore.google.com/detail/bnoooompfljhcmpeompgjfibbkjfbofh
+https://github.com/bottiger/trolling-with-love
+EOF
+)
+
+
+links3=$(cat <<'EOF'
+https://github.com/bottiger/SoundWaves
+EOF
+)
+
+
+# Function to wrap text at 80 characters
+wrap_and_pad_text() {
+    echo "$1" | fold -s -w 89 | while IFS= read -r line; do
+        printf "%-89s\n" "$line"
+    done
+}
+
+print_table_content() {
+    local input_text="$1"
+    local line_color="${2:-${RST_COLOR}}" 
+    while IFS= read -r line; do
+        wrapped_lines=$(wrap_and_pad_text "$line")
+        while IFS= read -r wrapped_line; do
+            printf "${GRAY_COLOR}|${RST_COLOR} ${line_color}%-80s${RST_COLOR} ${GRAY_COLOR}|${RST_COLOR}\n" "$wrapped_line"
+        done <<< "$wrapped_lines"
+    done <<< "$input_text"
+}
+
+print_project_table() {
+    local title="$1"
+    local description="$2"
+    local links="$3"
+
+    echo -e "${GRAY_COLOR}+ ----------------------------------------------------------------------------------------- +${RST_COLOR}"
+    print_table_content "$title" "$YELLOW_COLOR"
+    echo -e "${GRAY_COLOR}+ ----------------------------------------------------------------------------------------- +${RST_COLOR}"
+    print_table_content "$description"
+    echo -e "${GRAY_COLOR}+ ----------------------------------------------------------------------------------------- +${RST_COLOR}"
+    print_table_content "$links"
+    echo -e "${GRAY_COLOR}+ ----------------------------------------------------------------------------------------- +${RST_COLOR}"
+
+    echo -e "\n"
+}
+
+echo -e "${GRAY_COLOR}# Personal Projects${RST_COLOR}"
+print_project_table "Trollme.sh" "$description1" "$links1"
+print_project_table "Trolling with Love ❤️ Firefox Extension" "$description2" "$links2"
+print_project_table "Soundwaves Podcast (Discountinued)" "$description3" "$links3"

@@ -23,7 +23,8 @@ build: favicon.ico
 	cat <(./make-header) <(echo) <(./make-help) > _site/help
 	# create index ascii page for curl users
 	cat <(./make-header) <(echo) \
-	    <(./make-ascii-table episodes) \
+		<(./make-socials) <(echo) \
+		<(./make-projects) <(echo) \
 	    <(./make-footer) \
 	    > _site/index.txt
 	# create nocolor version of that page
@@ -33,7 +34,7 @@ build: favicon.ico
 	# create the main HTML page
 	cat <(./make-header) <(echo) \
 	    <(./make-socials) <(echo) \
-	    <(./make-ascii-table episodes) \
+		<(./make-projects) <(echo) \
 	    <(./make-footer) <(echo) \
 	    <(./make-help) \
 	    <(./make-donate) \
@@ -43,8 +44,10 @@ build: favicon.ico
 		| sed -e 's|https://[a-zA-Z0-9./-]*|<a href="&">&</a>|g' \
 		| sed -e '/CONTENT/{r /dev/stdin' -e 'd;}' index.html.template > _site/index.html
 
+# <(./make-ascii-table episodes) \
+
 favicon.ico:
-	curl -o $@ https://secure.gravatar.com/avatar/d6e53a055695ad6488b32a6ac4f6ee5d?s=32
+	curl -o $@ https://secure.gravatar.com/avatar/0c3a510f69b99f30c434290f0c935a41?s=32
 
 .PHONY: all
 all: build deploy

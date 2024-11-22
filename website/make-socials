@@ -9,11 +9,8 @@
 . ./colors || exit 1
 . ./util || exit 1
 
-echo -e "${GRAY_COLOR}# join the community${RST_COLOR}
-${GRAY_COLOR}+ --------- + ------------------------- +${RST_COLOR}
-${GRAY_COLOR}| ${GREEN_COLOR}YouTube  ${GRAY_COLOR} | ${BLUE_COLOR}https://$SITE/youtube   ${GRAY_COLOR}|${RST_COLOR}
-${GRAY_COLOR}| ${GREEN_COLOR}Instagram${GRAY_COLOR} | ${BLUE_COLOR}https://$SITE/instagram ${GRAY_COLOR}|${RST_COLOR}
-${GRAY_COLOR}| ${GREEN_COLOR}TikTok   ${GRAY_COLOR} | ${BLUE_COLOR}https://$SITE/tiktok    ${GRAY_COLOR}|${RST_COLOR}
-${GRAY_COLOR}| ${GREEN_COLOR}Merch    ${GRAY_COLOR} | ${BLUE_COLOR}https://$SITE/merch     ${GRAY_COLOR}|${RST_COLOR}
-${GRAY_COLOR}| ${GREEN_COLOR}Discord  ${GRAY_COLOR} | ${BLUE_COLOR}https://$SITE/discord   ${GRAY_COLOR}|${RST_COLOR}
-${GRAY_COLOR}+ --------- + ------------------------- +${RST_COLOR}"
+echo -e "${GRAY_COLOR}# Also find me at${RST_COLOR}
+${GRAY_COLOR}+ --------- + ------------------------------------- +${RST_COLOR}
+${GRAY_COLOR}| ${GREEN_COLOR}Github   ${GRAY_COLOR} | ${BLUE_COLOR}https://github.com/bottiger           ${GRAY_COLOR}|${RST_COLOR}
+${GRAY_COLOR}| ${GREEN_COLOR}LinkedIn ${GRAY_COLOR} | ${BLUE_COLOR}https://www.linkedin.com/in/bottiger/ ${GRAY_COLOR}|${RST_COLOR}
+${GRAY_COLOR}+ --------- + ------------------------------------- +${RST_COLOR}"

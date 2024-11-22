@@ -9,19 +9,19 @@
 . ./colors || exit 1
 . ./util || exit 1
 
-examples=(
-	'|get the list of episodes'
-	'/nocolor|get the list of episodes without color'
-	'/json|get the list of episodes in json format'
-	'/help|get the help and usage docs'
-	'/ip|get your current IP address as a string'
-	'/ping|get a 200 with the text "pong"'
-)
+#examples=(
+#	'|get the list of episodes'
+#	'/nocolor|get the list of episodes without color'
+#	'/json|get the list of episodes in json format'
+#	'/help|get the help and usage docs'
+#	'/ip|get your current IP address as a string'
+#	'/ping|get a 200 with the text "pong"'
+#)
 
-for example in "${examples[@]}"; do
-	IFS='|' read -r endpoint desc <<< "$example"
-	url=${SITE}$endpoint
-	echo -e "${GRAY_COLOR}# $desc${RST_COLOR}"
-	echo -e "${GREEN_COLOR}$ curl ${RST_COLOR}$url"
-	echo
-done
+#for example in "${examples[@]}"; do
+#	IFS='|' read -r endpoint desc <<< "$example"
+#	url=${SITE}$endpoint
+#	echo -e "${GRAY_COLOR}# $desc${RST_COLOR}"
+#	echo -e "${GREEN_COLOR}$ curl ${RST_COLOR}$url"
+#	echo
+#done
